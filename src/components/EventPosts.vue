@@ -1,5 +1,5 @@
 <template>
-    <div v-for="post in posts">
+    <div v-for="post in posts[0]">
         <event-post :post="post"/>
         <hr/>
     </div>

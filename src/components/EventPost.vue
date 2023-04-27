@@ -1,0 +1,44 @@
+<template>
+    <div style="display: flex;">
+        <img src="../assets/logo.png"/>
+        <div style="display: flex; flex-direction:
+            column">
+            <h1>{{ post.title }}</h1>
+            <h4 style="word-break: break-all">{{
+                    post.body
+                }}</h4>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between">
+        <div style="display: flex">
+          <h1 @click="upVote">☻</h1>
+          <h1>{{ post.rating }}</h1>
+          <h1 @click="downVote">☺</h1>
+        </div>
+        <div style="display: flex; align-self: center;">
+            <div style="border: 1px solid black; padding:
+             2px 5px; margin: 0 10px;">
+                {{ post.filter }}
+            </div>
+            <dnlkk-array-slider :tags="post.tags"/>
+        </div>
+    </div>
+</template>
+
+<script>
+
+export default {
+    name: "EventPost",
+    methods: {
+        upVote() {
+
+        }
+    },
+    props: ['post']
+}
+</script>
+
+<style scoped>
+
+</style>

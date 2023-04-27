@@ -5,7 +5,8 @@
             class="clickable">&lt;&lt;</h3>
         <transition-group name="tag-list">
             <div class="tag-item"
-                 v-for="tag in chosenTags">
+                 v-for="tag in chosenTags"
+            @click="remove(tag)">
                 {{ tag }}
             </div>
         </transition-group>
@@ -20,6 +21,10 @@ export default {
     props: {
         tags: {
             type: Array,
+            required: true
+        },
+        isRemovable: {
+            type: Boolean,
             required: true
         }
     },
@@ -47,6 +52,9 @@ export default {
         nextTag() {
             if (this.current + this.max < this.tags.length)
                 this.current++;
+        },
+        remove(tag) {
+            if (this.isRemovable) this.$emit('remove', tag)
         }
     }
 

@@ -25,7 +25,8 @@
              2px 5px; margin: 0 10px;">
                     {{ post.filter }}
                 </div>
-                <dnlkk-array-slider :tags="post.tags"/>
+                <dnlkk-array-slider :tags="post.tags"
+                :is-removable="false"/>
             </div>
         </div>
     </div>

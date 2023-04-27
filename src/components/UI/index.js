@@ -3,8 +3,9 @@ import DnlkkInput from "@/components/UI/DnlkkInput.vue";
 import DnlkkArraySlider
     from "@/components/UI/DnlkkArraySlider.vue";
 import DnlkkSelect from "@/components/UI/DnlkkSelect.vue";
+import DnlkkDialog from "@/components/UI/DnlkkDialog.vue";
 
 
 export default [
-    DnlkkButton, DnlkkInput, DnlkkArraySlider, DnlkkSelect
+    DnlkkButton, DnlkkInput, DnlkkArraySlider, DnlkkSelect, DnlkkDialog
 ]

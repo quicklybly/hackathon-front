@@ -12,7 +12,7 @@
     box-sizing: border-box;
 }
 #app {
-
+  min-height: 85vh;
 }
 </style>
 

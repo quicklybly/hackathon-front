@@ -6,7 +6,7 @@
                     align-self: center;
                     justify-content: center;">
       <div class="col-lg-2"></div>
-      <div class="col-lg-6" style = "border: solid 2px #EC1D35; border-radius: 5px; padding: 20px 30px 20px; margin: auto;" >
+      <div class="col-lg-6 form" >
         <div class="row">
           <div v-if="!isRecovery && !isRegistration"
                   class="auth">
@@ -25,9 +25,13 @@
           <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Войти</button>
         </div>
         <div class = "row">
-          <i @click="onChangeRecovery" style="cursor: pointer">Забыли
+          <i class="btn-hover-link"
+             @click="onChangeRecovery"
+             style="cursor: pointer">
+              Забыли
               пароль?</i>
-          <i @click="onChangeRegistration" style="cursor:
+          <i class="btn-hover-link" 
+             @click="onChangeRegistration" style="cursor:
         pointer">Зарегистрироваться</i>
         </div>
       </div>
@@ -39,7 +43,7 @@
             class="recovery container text-center craft-container"
             >
       <div class="col-2"></div>
-      <div class="col-8" style = "border: solid 2px #EC1D35; border-radius: 5px; padding: 20px 30px 20px; margin: auto;">
+      <div class="col-8 form">
       <div class="row">
         <p>Восстановление пароля</p>
       </div>
@@ -51,9 +55,11 @@
         <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Восстановить</button>
       </div>
       <div class="row">
-        <i @click="onChangeRecovery" style="cursor: pointer">Я
+        <i class="btn-hover-link"
+           @click="onChangeRecovery" style="cursor: pointer">Я
             вспомнил пароль</i>
-        <i @click="onChangeRegistration" style="cursor:
+        <i class="btn-hover-link"
+           @click="onChangeRegistration" style="cursor:
         pointer">Я вспомнил что ещё не зарегистрирован!</i>
       </div>
       </div>
@@ -64,7 +70,7 @@
        style=" display: flex;
                 justify-content: center;">
     <div class="col-3"></div>
-    <div class="col-6" style = "border: solid 2px #EC1D35; border-radius: 5px;">
+    <div class="col-6 form">
       <div
           class="reg" style = "padding: 20px 30px 20px; margin: auto;">
         <div class="row">
@@ -109,7 +115,8 @@
           <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Регистрирация</button>
         </div>
         <div class="row row1">
-          <i @click="onChangeRegistration" style="cursor: pointer">Я
+          <i class="btn-hover-link"
+             @click="onChangeRegistration" style="cursor: pointer">Я
               вспомнил, что уже зарегистрован!</i>
         </div>
       </div>
@@ -180,6 +187,39 @@ i {
 }
 .craft-container {
   margin-top: 5%;
+}
+
+.form{
+  backdrop-filter: blur(8px);border: solid 2px
+	#EC1D35;
+	border-radius: 5px; padding: 20px 30px 20px; margin: auto;
+}
+
+
+.btn-hover-link {
+	position: relative;
+    display: inline-block;
+      /* устанавливаем блочный тип отображения, чтобы ширина подчеркивания соответствовала ширине текста */
+	text-decoration: none; /* убираем стандартное подчеркивание */
+}
+
+.btn-hover-link::before {
+	content: '_';
+    /* устанавливаем пустое содержимое для псевдоэлемента */
+	position: absolute; /* устанавливаем абсолютное позиционирование */
+	left: 0; /* сдвигаем подчеркивание в самое начало родительского элемента */
+	bottom: -5px; /* опускаем подчеркивание на 5 пикселей ниже нижней границы родительского элемента */
+	width: 100%; /* задаем ширину подчеркивания равной ширине родительского элемента */
+	height: 2px; /* задаем высоту подчеркивания */ /* задаем цвет подчеркивания */
+	transform: scaleX(0) translateY(-20px);
+    /* устанавливаем начальное значение шкалы преобразования равное 0, чтобы подчеркивание изначально было невидимым */
+	transition: transform 0.3s ease-out;
+	/* добавляем плавный переход ширины подчеркивания */
+}
+
+.btn-hover-link:hover::before {
+	transform: scaleX(30) translateY(-20px);
+    /* при наведении увеличиваем ширину подчеркивания до 100% */
 }
 
 </style>

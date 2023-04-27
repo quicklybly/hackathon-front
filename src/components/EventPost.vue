@@ -2,7 +2,10 @@
     <div style="margin: 10px 50px; padding: 10px 5px;
         border: 1px solid #9B9C9E; border-radius: 15px;">
         <div style="display: flex;">
-            <img src="../assets/logo.png" style="width: auto;height: auto;"/>
+            <img src="../assets/logo.png"
+                 style="aspect-ratio: 1/1;
+                 width: auto;
+                 object-fit: scale-down;"/>
             <div style="display: flex; flex-direction:
             column">
                 <h1>{{ post.title }}</h1>

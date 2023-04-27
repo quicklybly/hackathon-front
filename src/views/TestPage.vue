@@ -1,23 +1,35 @@
 <template>
     <h3>hi there!</h3>
     <hr/>
-    <div class="input">
-        <dnlkk-input
-                v-focus
-                v-model="searchTag"
-                placeholder="Поиск по тегам......"
-                :posts="posts"
-                v-on:keyup.enter="onEnter"/>
+    <div class="main">
+        <div class="instruments">
+            <div class="input">
+                <dnlkk-input
+                        v-focus
+                        v-model="searchTag"
+                        placeholder="Поиск по тегам......"
+                        :posts="posts"
+                        v-on:keyup.enter="onEnter"/>
+            </div>
+            <div class="input">
+                <dnlkk-select
+                        v-model="selectedSort"
+                        :options="sortOptions"
+                        @change="onChange"/>
+            </div>
+            <br/>
+        </div>
+        <div>
+            <div class="input">
+                <dnlkk-array-slider
+                        :tags="searchTags"
+                        :is-removable="true"
+                        @remove="onRemove"/>
+            </div>
+            <event-posts
+                    :posts="sortedAndSearchedEvents"/>
+        </div>
     </div>
-    <br/>
-    <div class="input">
-        <dnlkk-array-slider
-            :tags="searchTags"
-            :is-removable="true"
-        @remove="onRemove"/>
-    </div>
-    <event-posts
-            :posts="sortedAndSearchedEvents"/>
     <personal-cabinet/>
 </template>
 
@@ -25,6 +37,7 @@
 import EventPost from "@/components/EventPost.vue";
 import PersonalCabinet from "@/views/PersonalCabinet.vue";
 import EventPosts from "@/components/EventPosts.vue";
+import axios from "axios";
 
 export default {
     name: "TestPage",
@@ -63,18 +76,28 @@ export default {
                     filter: 'algorithmic'
                 },
             ],
-            selectedSort: 'tags',
+            selectedSort: 'Все',
             searchTag: '',
             searchTags: [],
-            searchedTags: []
+            searchedTags: [],
+            sortOptions: ['Все', 'CTF', 'hackathon',
+                'algorithmic']
         }
     },
     computed: {
+        sortedEvents() {
+            if (this.selectedSort === this.sortOptions[0]) {
+                return [...this.update()];
+            }
+            return [...this.update()].filter(post =>
+                post.filter === this.selectedSort
+            )
+        },
         sortedAndSearchedEvents() {
-                return [...this.update()].filter(post =>
-                        post.tags.join('').includes(
-                            this.searchTag
-                                .toLowerCase()))
+            return this.sortedEvents.filter(post =>
+                post.tags.join('').includes(
+                    this.searchTag
+                        .toLowerCase()))
         }
     },
     methods: {
@@ -85,7 +108,7 @@ export default {
             this.searchedTags = this.update()
             console.log(this.searchedTags)
         },
-        onRemove(tag){
+        onRemove(tag) {
             let index = this.searchTags.indexOf(tag)
 
             console.log(index)
@@ -100,7 +123,18 @@ export default {
             return [...this.posts].filter(subArr =>
                 this.searchTags.every(el =>
                     subArr.tags.includes(el)))
+        },
+        async fetchPosts() {
+            let obj = await axios
+                .get('http://95.140.158.92:8080/api/events/tags')
+            console.log(obj)
+        },
+        onChange(elem){
+            this.selectedSort = elem.target.value
         }
+    },
+    mounted() {
+        this.fetchPosts();
     }
 }
 </script>
@@ -109,5 +143,19 @@ export default {
 .input {
 	display: flex;
 	justify-content: center;
+
+	margin: 5px 0;
+}
+
+.main {
+	display: flex;
+	flex-direction: row;
+
+	margin: 30px 20px;
+}
+
+.instruments {
+	display: flex;
+	flex-direction: column;
 }
 </style>

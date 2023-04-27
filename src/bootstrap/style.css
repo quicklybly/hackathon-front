@@ -1,0 +1,12 @@
+:root {
+    --color1: #1B1C21; /*black*/
+    --color2: #2D2E37; /*gray bright*/
+    --color3: #3A3C46; /*gray middle*/
+    --color4: #9B9C9E; /*gray lighte-2*/
+    --color5: #D9D9D9; /*gray lighte*/
+    --color6: #EDEDED; /*white*/
+}
+
+.header {
+    background-color: var(--color1);
+}

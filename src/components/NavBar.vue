@@ -1,5 +1,6 @@
 <template>
-    <div class="header container text-center">
+  <div class="header">
+    <div class="container text-center">
       <div class ="row">
         <div class = "col-2"><img src = "./img/ФСП_Короткий1.png" class="img-fluid"></div>
         <div class = "col-2"><button type="button" class="btn btn-itm-color btn-lg">Событие</button></div>
@@ -9,6 +10,7 @@
         <div class = "col-2"><button type="button" class="btn btn-itm-color btn-lg">войти</button></div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -31,6 +33,7 @@ export default {
 }
 .header {
   background-color: #1B1C21;
+
 }
 
 .btn-itm-color {

@@ -1,6 +1,7 @@
 <template>
   <link rel="stylesheet" href="fontello-a6d9d753/css/fontello.css">
-  <div class = "footer container text-center">
+  <div class = "footer">
+  <div class = "container text-center">
     <div class="row">
       <div class="col-6"><img src = "./img/dark_background1.png" class="img-fluid"></div>
       <div class="col-4"></div>
@@ -10,6 +11,7 @@
         <div class="itd_circle"><i class = "icon-telegram"></i></div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

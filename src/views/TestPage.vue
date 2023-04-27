@@ -9,6 +9,13 @@
                 :posts="posts"
                 v-on:keyup.enter="onEnter"/>
     </div>
+    <br/>
+    <div class="input">
+        <dnlkk-array-slider
+            :tags="searchTags"
+            :is-removable="true"
+        @remove="onRemove"/>
+    </div>
     <event-posts
             :posts="sortedAndSearchedEvents"/>
     <personal-cabinet/>
@@ -47,25 +54,52 @@ export default {
                     tags: ['fanta', 'cola', 'senior', 'sprite', 'google'],
                     filter: 'algorithmic'
                 },
+                {
+                    title: 'test4',
+                    body: 'hi!!! there!',
+                    rating: 101,
+                    tags: ['c', 'spring', 'vue.js',
+                        'IE'],
+                    filter: 'algorithmic'
+                },
             ],
             selectedSort: 'tags',
             searchTag: '',
-            searchTags: []
+            searchTags: [],
+            searchedTags: []
         }
     },
     computed: {
         sortedAndSearchedEvents() {
-            console.log(this.searchTag);
-            return [...this.posts].filter(post =>
-                post.tags.join('')
-                    .includes(this.searchTag
-                        .toLowerCase()))
+                return [...this.update()].filter(post =>
+                        post.tags.join('').includes(
+                            this.searchTag
+                                .toLowerCase()))
         }
     },
     methods: {
         onEnter() {
             this.searchTags.push(this.searchTag)
             this.searchTag = ''
+
+            this.searchedTags = this.update()
+            console.log(this.searchedTags)
+        },
+        onRemove(tag){
+            let index = this.searchTags.indexOf(tag)
+
+            console.log(index)
+
+            if (index !== -1) {
+                this.searchTags.splice(index, 1)
+                this.update()
+            }
+
+        },
+        update() {
+            return [...this.posts].filter(subArr =>
+                this.searchTags.every(el =>
+                    subArr.tags.includes(el)))
         }
     }
 }

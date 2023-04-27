@@ -144,25 +144,29 @@ export default {
 
 <style scoped>
 .content {
-  background-color: #2D2E37;
+  background-image: url("/src/components/img/auth-background.jpg");
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-color: #1B1C21;
   height: 90vh;
   display: flex;
   flex-direction: column;
 }
 P {
   color: #EDEDED;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
 }
 i {
   color: #EDEDED;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
 }
 
 .btn-craft{
   color: #EDEDED;
   font-size: 18px;
+  font-weight: 500;
 }
 
 .btn-row {

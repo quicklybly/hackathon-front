@@ -1,17 +1,17 @@
 <template>
+
     <h3 @click="prevTag"
-        v-if="current > 0">&lt;&lt;</h3>
+        v-if="current > 0"
+        class="clickable">&lt;&lt;</h3>
     <transition-group name="tag-list">
-        <div class="tag-item" style="border: 1px solid
-        black;
-                border-radius: 50%; align-self: center;
-                padding: 2px 5px; margin: 0 10px"
+        <div class="tag-item"
              v-for="tag in chosenTags">
             {{ tag }}
         </div>
     </transition-group>
     <h3 @click="nextTag"
-    v-if="current+max < tags.length">&gt;&gt;</h3>
+        class="clickable"
+        v-if="current+max < tags.length">&gt;&gt;</h3>
 </template>
 
 <script>
@@ -53,21 +53,33 @@ export default {
 </script>
 
 <style scoped>
+.tag-item {
+	border: 1px solid black;
+	border-radius: 50%;
+	align-self: center;
+	padding: 2px 5px;
+	margin: 0 10px;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
 .tag-list .tag-item {
-    display: inline-block;
-    margin-right: 10px;
+	display: inline-block;
+	margin-right: 10px;
 }
 
 .tag-list-enter-active, .tag-list-leave-active {
-    transition: all 0.4s ease;
+	transition: all 0.4s ease;
 }
 
 .tag-list-enter-from, .tag-list-leave-to {
-    opacity: 0;
-    transform: translateX(150px);
+	opacity: 0;
+	transform: translateX(150px);
 }
 
 .tag-list-move {
-    transition: transform 0.4s ease;
+	transition: transform 0.4s ease;
 }
 </style>

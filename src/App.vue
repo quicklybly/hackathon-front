@@ -1,5 +1,5 @@
 <template>
-    <nav-bar />
+    <nav-bar/>
     <div id="app">
         <router-view/>
     </div>
@@ -8,11 +8,14 @@
 
 <style>
 * {
-    margin: 0;
-    box-sizing: border-box;
+	margin: 0;
+	box-sizing: border-box;
+    font-family: "JetBrains Mono", serif;
 }
+
 #app {
-  min-height: 85vh;
+	min-height: 85vh;
+	background: white;
 }
 </style>
 

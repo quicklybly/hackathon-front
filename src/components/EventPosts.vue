@@ -1,7 +1,7 @@
 <template>
     <div v-for="post in posts[0]">
         <event-post :post="post"/>
-        <hr/>
+        <hr />
     </div>
 </template>
 

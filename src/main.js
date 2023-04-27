@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Vuetify from "vue";
 import 'vuetify/dist/vuetify.min.css'
 
 import components from "@/components/UI";
@@ -21,5 +20,4 @@ directives.forEach(directive => {
 app
     .use(store)
     .use(router)
-    .use(Vuetify)
     .mount('#app')

@@ -1,6 +1,6 @@
 <template>
     <div
-        v-for="post in posts[0]">
+        v-for="post in posts">
         <event-post :post="post"/>
         <hr />
     </div>
@@ -13,15 +13,12 @@ import usePosts from "@/components/hooks/usePosts";
 export default {
     name: "EventPosts",
     components: {EventPost},
-    setup(props) {
-        const {
-            posts
-        } = usePosts();
+    props: {
+      posts:{
+          type: Array
+      }
+    },
 
-        return {
-            posts
-        }
-    }
 }
 </script>
 

@@ -34,7 +34,9 @@
                 </div>
                 <div class="col-2"></div>
                 <div class="col-2">
-                    <button type="button"
+                    <button
+                        @click="$router.push('/auth')"
+                        type="button"
                             class="btn btn-itm-color btn-lg">
                         войти
                     </button>
@@ -43,14 +45,10 @@
         </div>
     </div>
 </template>
-
 <script>
-
-import DnlkkButton from "@/components/UI/DnlkkButton";
 
 export default {
     name: "NavBar",
-    components: {DnlkkButton},
 }
 </script>
 

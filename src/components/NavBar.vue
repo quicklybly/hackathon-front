@@ -3,11 +3,8 @@
         <div @click="$router.push('/')">
             <h2 style="color: white;">logo placeholder</h2>
         </div>
-        <div>
-            <dnlkk-button
-                    @click="$router.push('/sign-in')">
-                Войти
-            </dnlkk-button>
+        <div class="info-panel">
+
         </div>
     </div>
 </template>
@@ -29,4 +26,7 @@ export default {
 
 }
 
+.info-panel {
+    display: flex;
+}
 </style>

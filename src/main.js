@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import 'vuetify/dist/vuetify.min.css'
 
 import components from "@/components/UI";
 import directives from "@/directives";

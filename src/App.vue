@@ -1,4 +1,5 @@
 <template>
+  <link rel="stylesheet" href="/src/components/fontello-a6d9d753/css/fontello.css">
     <nav-bar/>
     <div id="app">
         <router-view/>

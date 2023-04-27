@@ -12,9 +12,11 @@
 
     <div style="display: flex; justify-content: space-between">
         <div style="display: flex">
-          <h1 @click="upVote">☻</h1>
-          <h1>{{ post.rating }}</h1>
-          <h1 @click="downVote">☺</h1>
+          <h1 class="contain"
+              @click="upVote">☻</h1>
+          <h1 class="contain" >{{ post.rating }}</h1>
+          <h1 class="contain"
+               @click="downVote">☺</h1>
         </div>
         <div style="display: flex; align-self: center;">
             <div style="border: 1px solid black; padding:
@@ -40,5 +42,8 @@ export default {
 </script>
 
 <style scoped>
-
+.contain {
+    display: flex;
+    margin: 0;
+}
 </style>

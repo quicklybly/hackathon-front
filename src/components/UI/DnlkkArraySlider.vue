@@ -1,17 +1,18 @@
 <template>
-
-    <h3 @click="prevTag"
-        v-if="current > 0"
-        class="clickable">&lt;&lt;</h3>
-    <transition-group name="tag-list">
-        <div class="tag-item"
-             v-for="tag in chosenTags">
-            {{ tag }}
-        </div>
-    </transition-group>
-    <h3 @click="nextTag"
-        class="clickable"
-        v-if="current+max < tags.length">&gt;&gt;</h3>
+    <div class="contain">
+        <h3 @click="prevTag"
+            v-if="current > 0"
+            class="clickable">&lt;&lt;</h3>
+        <transition-group name="tag-list">
+            <div class="tag-item"
+                 v-for="tag in chosenTags">
+                {{ tag }}
+            </div>
+        </transition-group>
+        <h3 @click="nextTag"
+            class="clickable"
+            v-if="current+max < tags.length">&gt;&gt;</h3>
+    </div>
 </template>
 
 <script>
@@ -63,6 +64,11 @@ export default {
 
 .clickable {
 	cursor: pointer;
+    margin: 0;
+}
+
+.contain{
+    display: flex;
 }
 
 .tag-list .tag-item {

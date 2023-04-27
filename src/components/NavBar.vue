@@ -75,4 +75,11 @@ export default {
 .btn-itm-color {
 	color: #EDEDED;
 }
+
+.col-2 {
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+}
 </style>

@@ -21,6 +21,9 @@
                   type="password"
                   placeholder="Ваш пароль"/>
         </div>
+        <div class="row btn-row">
+          <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Войти</button>
+        </div>
         <div class = "row">
           <i @click="onChangeRecovery" style="cursor: pointer">Забыли
               пароль?</i>
@@ -44,6 +47,9 @@
         <dnlkk-input
                 placeholder="Ваша почта/логин"/>
       </div>
+      <div class="row btn-row">
+        <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Восстановить</button>
+      </div>
       <div class="row">
         <i @click="onChangeRecovery" style="cursor: pointer">Я
             вспомнил пароль</i>
@@ -62,7 +68,7 @@
       <div
           class="reg" style = "padding: 20px 30px 20px; margin: auto;">
         <div class="row">
-          <p>Регистрация</p>
+          <p>Зарегистрироваться в ФСП</p>
         </div>
         <div class="row">
           <dnlkk-input
@@ -98,6 +104,9 @@
           <dnlkk-input
               type="date"
               placeholder="Дата рождения"/>
+        </div>
+        <div class="row btn-row">
+          <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Регистрирация</button>
         </div>
         <div class="row row1">
           <i @click="onChangeRegistration" style="cursor: pointer">Я
@@ -135,15 +144,33 @@ export default {
 
 <style scoped>
 .content {
-  background-color: #1B1C21;
-  height: 100vh;
+  background-color: #2D2E37;
+  height: 90vh;
   display: flex;
   flex-direction: column;
 }
-i, P {
+P {
   color: #EDEDED;
   font-weight: 500;
+  font-size: 20px;
 }
+i {
+  color: #EDEDED;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.btn-craft{
+  color: #EDEDED;
+  font-size: 18px;
+}
+
+.btn-row {
+  width: 40%;
+  padding: 10px;
+  margin: auto;
+}
+
 .row1 {
   padding-top: 10px;
 }

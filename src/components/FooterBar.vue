@@ -35,6 +35,8 @@ export default {
 	min-height: 50px;
 	border: 3px solid #3A3C46;
 	border-radius: 50%;
+
+  cursor: pointer;
 }
 
 .itd_circles {

@@ -13,7 +13,7 @@
                         @click="$router.push('/news')"
                         type="button"
                         class="btn btn-itm-color btn-lg">
-                        Новости
+                        Календарь
                     </button>
                 </div>
                 <div class="col-lg-2 col-md-2 col-xs-12" style="margin: auto">
@@ -21,7 +21,7 @@
                         @click="$router.push('/calendar')"
                         type="button"
                             class="btn btn-itm-color btn-lg">
-                        Календарь
+                        События
                     </button>
                 </div>
                 <div class="col-lg-2 col-md-2 col-xs-12" style="margin: auto">

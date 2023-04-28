@@ -10,7 +10,7 @@
               <div class="col-lg-4 col-md-1"></div>
                 <div class="col-lg-2 col-md-3 itd_circles">
                     <div class="itd_circle">
-                        <img src="../components/img/icon/letter.png" style="max-width: 35px; max-height: 35px; margin-top: 3px"/>
+                        <a href="mailto:info@fsp-russia.com"><img src="../components/img/icon/letter.png" style="max-width: 35px; max-height: 35px; margin-top: 3px"/></a>
                     </div>
                 </div>
             </div>

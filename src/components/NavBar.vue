@@ -41,14 +41,22 @@
                             class="btn btn-itm-color btn-lg">
                         войти
                     </dnlkk-button>
-                    <dnlkk-button
-                        v-else
-                        @click="$router.push('/lk')"
-                        type="button"
-                        class="btn btn-itm-color btn-lg">
-                        {{ $store.state.login }}
-                    </dnlkk-button>
-                </div>
+                    <div v-else style="display: flex">
+                        <dnlkk-button
+                            @click="$router.push('/lk')"
+                            type="button"
+                            class="btn btn-itm-color btn-lg">
+                            {{ username }}
+                        </dnlkk-button>
+                        <dnlkk-button
+                            @click="$router.push('/auth'); $store.commit('unAuth');"
+                            type="button"
+                            class="btn btn-itm-color btn-lg">
+                            выйти
+                        </dnlkk-button>
+
+                    </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -56,11 +64,33 @@
 
 <script>
 
-import DnlkkButton from "@/components/UI/DnlkkButton";
+import {mapState} from "vuex";
 
 export default {
     name: "NavBar",
-    components: {DnlkkButton},
+    computed: {
+        ...mapState({
+            username: state => state.self.username
+        })
+    },
+    watch: {
+        username(newValue){
+            this.username = newValue
+        }
+    },
+    mounted() {
+        this.$store.dispatch('login', {
+            headers: {
+                'Authorization':
+                    'Bearer ' +
+                    localStorage.getItem('jwt')
+            }
+        })
+            .then()
+            .catch(error => {
+                console.error(error)
+            })
+    }
 }
 </script>
 

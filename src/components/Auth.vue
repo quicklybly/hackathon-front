@@ -70,6 +70,20 @@ export default {
         },
         onAuth() {
             this.fetchJWT(this.login, this.password)
+
+            console.log(localStorage.getItem('jwt'));
+
+            this.$store.dispatch('login', {
+                headers: {
+                    'Authorization':
+                    'Bearer ' +
+                        localStorage.getItem('jwt')
+                }
+            })
+                .then()
+                .catch(error => {
+                    console.error(error)
+                })
         },
         async fetchJWT(login, pass) {
             return await axios

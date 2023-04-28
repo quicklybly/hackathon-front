@@ -1,5 +1,4 @@
 <template>
-    <h3>hi there!</h3>
     <hr/>
     <div class="main">
         <div class="instruments">
@@ -30,7 +29,6 @@
                     :posts="sortedAndSearchedEvents"/>
         </div>
     </div>
-    <personal-cabinet/>
 </template>
 
 <script>
@@ -41,51 +39,19 @@ import axios from "axios";
 import {BASE_URL} from "@/baseUrl";
 
 export default {
-    name: "TestPage",
+    name: "CalendarPage",
     components: {
         EventPosts, PersonalCabinet, EventPost
     },
     data() {
         return {
-            posts: [
-                /*{
-                title: 'test1',
-                description: 'hi there!',
-                rating: -22,
-                tags: ['c', 'crips', 'a lot of food', 'middle'],
-                type: 'CTF'
-            },
-                {
-                    title: 'test2',
-                    description: 'F:LSAJOPFJASOFJASPIHJFPOQWKFPOASJPOOPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP!',
-                    rating: 100,
-                    tags: ['flask', 'spring', 'summer', 'avangard'],
-                    type: 'Продуктовое программирование'
-                },
-                {
-                    title: 'test3',
-                    description: 'hi there!',
-                    rating: -9999,
-                    tags: ['fanta', 'cola', 'senior', 'sprite', 'google'],
-                    type: 'Спортивное программирование'
-                },
-                {
-                    title: 'test4',
-                    description: 'hi!!! there!',
-                    rating: 101,
-                    tags: ['c', 'spring', 'vue.js',
-                        'IE'],
-                    type: 'Спортивное программирование'
-                },*/
-            ],
+            posts: [],
             selectedSort: 'Все',
             searchTag: '',
             searchTags: [],
             searchedTags: [],
             baseTags: [],
-            sortOptions: ['Все', 'CTF',
-                'Продуктовое программирование',
-                'Спортивное программирование']
+            sortOptions: ['Все']
         }
     },
     computed: {
@@ -151,6 +117,15 @@ export default {
             })
             console.log(this.posts);
         },
+        async fetchTypes() {
+            let obj = await axios
+                .get(`${BASE_URL}events/types`)
+            obj.data.forEach(post => {
+                this.sortOptions.push(post.displayName)
+            })
+            console.log("das");
+            console.log(obj);
+        },
         onChange(elem){
             this.selectedSort = elem.target.value
         }
@@ -158,6 +133,7 @@ export default {
     mounted() {
         this.fetchTags();
         this.fetchPosts();
+        this.fetchTypes();
     }
 }
 </script>

@@ -4,9 +4,10 @@ export function useInfo() {
 
     const name = ref('name')
     const surname = ref('surname')
+    const patronymic = ref('ot4estvo')
     const birthDate = ref('01.01.1970')
-    const city = ref('voronezh')
-    const phoneNumber = ref('89001234567')
+    const login = ref('login')
+    const passport = ref('1817012345')
     const email = ref('mail@mail.ru')
 
     let named = name.value.trim()
@@ -15,15 +16,16 @@ export function useInfo() {
     let surnamed = surname.value.trim()
     surnamed = surnamed.charAt(0).toUpperCase() + surnamed.substring(1)
 
-    const fullname =  `${named} ${surnamed}`
+    let patronymiced = patronymic.value.trim()
+    patronymiced = patronymiced.charAt(0).toUpperCase() + patronymiced.substring(1)
+
+    const fullname =  `${named} ${surnamed} ${patronymiced}`.trim()
 
     return {
-        name,
-        surname,
         fullname,
+        login,
         birthDate,
-        city,
-        phoneNumber,
+        passport,
         email
     }
 }

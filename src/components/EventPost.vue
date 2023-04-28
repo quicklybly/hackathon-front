@@ -18,10 +18,14 @@
         <div style="display: flex; justify-content: space-between">
             <div style="display: flex">
                 <h1 class="contain"
-                    @click="upVote">☻</h1>
-                <h1 class="contain"> 123 </h1>
+                    @click="upVote"
+                    style="color: cornflowerblue; cursor: pointer">▲</h1>
                 <h1 class="contain"
-                    @click="downVote">☺</h1>
+                    :style='{color: color}'>
+                    123 </h1>
+                <h1 class="contain"
+                    @click="downVote"
+                    style="color: indianred; cursor: pointer">▼</h1>
             </div>
             <div style="display: flex; align-self: center;">
                 <div style="border: 1px solid black; padding:
@@ -29,7 +33,7 @@
                     {{ post.type.displayName }}
                 </div>
                 <dnlkk-array-slider :tags="post.tags"
-                :is-removable="false"/>
+                                    :is-removable="false"/>
             </div>
         </div>
     </div>
@@ -39,9 +43,17 @@
 
 export default {
     name: "EventPost",
+    data() {
+        return {
+            color: 'black',
+        }
+    },
     methods: {
         upVote() {
-
+            this.color = 'cornflowerblue'
+        },
+        downVote() {
+            this.color = 'indianred'
         }
     },
     props: ['post']

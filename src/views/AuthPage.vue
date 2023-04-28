@@ -8,21 +8,25 @@
       <div class="col-lg-2"></div>
       <div class="col-lg-6 form" >
         <div class="row">
-          <div v-if="!isRecovery && !isRegistration"
+          <div
                   class="auth">
               <p class="title">Вход в аккаунт</p>
           </div>
         </div>
         <div class="row">
-          <dnlkk-input placeholder="Ваш логин"/>
+          <dnlkk-input v-model="login"
+                       placeholder="Ваш логин"/>
         </div>
         <div class="row">
           <dnlkk-input
+                  v-model="password"
                   type="password"
                   placeholder="Ваш пароль"/>
         </div>
         <div class="row btn-row">
-          <button type="button" class="btn btn-craft btn-lg btn-outline-danger">Войти</button>
+          <dnlkk-button type="button"
+                        class="btn btn-craft btn-lg btn-outline-danger"
+          @click="onAuth(login, password)">Войти</dnlkk-button>
         </div>
         <div class = "row">
           <i class="btn-hover-link"
@@ -128,12 +132,16 @@
 
 <script>
 
+
 export default {
     name: "SignInPage",
     data() {
         return {
             isRecovery: false,
-            isRegistration: false
+            isRegistration: false,
+            isAuth: false,
+            login: '',
+            password: ''
         }
     },
     methods: {
@@ -144,6 +152,13 @@ export default {
         onChangeRegistration() {
             this.isRegistration = !this.isRegistration;
             this.isRecovery = false
+        },
+        onAuth() {
+            if (this.login === 'login' && this.password
+                === 'login') {
+                this.$store.commit('login', this.login)
+                this.$router.push('/lk')
+            }
         }
     }
 }

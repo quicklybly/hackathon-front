@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2 col-xs-12" style="margin: auto">
                     <button
-                        @click="$router.push('/test')"
+                        @click="$router.push('/calendar')"
                         type="button"
                             class="btn btn-itm-color btn-lg">
                         Календарь
@@ -34,12 +34,20 @@
                 </div>
                 <div class="col-lg-2 col-md-1 col-xs-12" style="margin: auto"></div>
                 <div class="col-lg-2 col-md-3 col-xs-12" style="margin: auto">
-                    <button
+                    <dnlkk-button
+                        v-if="!$store.state.isAuth"
                         @click="$router.push('/auth')"
                         type="button"
                             class="btn btn-itm-color btn-lg">
                         войти
-                    </button>
+                    </dnlkk-button>
+                    <dnlkk-button
+                        v-else
+                        @click="$router.push('/lk')"
+                        type="button"
+                        class="btn btn-itm-color btn-lg">
+                        {{ $store.state.login }}
+                    </dnlkk-button>
                 </div>
             </div>
         </div>

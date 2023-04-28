@@ -7,16 +7,10 @@
                          src="./img/dark_background1.png"
                          class="img-fluid clickable">
                 </div>
-              <div class="col-lg-4 col-md-1"><i class="icon-mail"></i></div>
+              <div class="col-lg-4 col-md-1"></div>
                 <div class="col-lg-2 col-md-3 itd_circles">
                     <div class="itd_circle">
-                      <i class="icon-vkontakte"/>
-                    </div>
-                    <div class="itd_circle">
-                      <div><i class="icon-youtube-play"/></div>
-                    </div>
-                    <div class="itd_circle">
-                        <i class="icon-telegram"/>
+                        <img src="../components/img/icon/letter.png" style="max-width: 35px; max-height: 35px; margin-top: 3px"/>
                     </div>
                 </div>
             </div>
@@ -45,7 +39,10 @@ export default {
 
 .itd_circles {
 	padding-top: 15px;
+  margin: auto;
 	display: flex;
+  align-self: center;
+  justify-content: center;
 }
 
 .clickable {

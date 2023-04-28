@@ -6,8 +6,8 @@
         <transition-group name="tag-list">
             <div class="tag-item"
                  v-for="tag in chosenTags"
-            @click="remove(tag)">
-                {{ tag }}
+            @click="remove(tag.name)">
+                {{ tag.name }}
             </div>
         </transition-group>
         <h3 @click="nextTag"

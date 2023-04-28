@@ -38,6 +38,7 @@ import EventPost from "@/components/EventPost.vue";
 import PersonalCabinet from "@/views/PersonalCabinet.vue";
 import EventPosts from "@/components/EventPosts.vue";
 import axios from "axios";
+import {BASE_URL} from "@/baseUrl";
 
 export default {
     name: "TestPage",
@@ -46,42 +47,45 @@ export default {
     },
     data() {
         return {
-            posts: [{
+            posts: [
+                /*{
                 title: 'test1',
-                body: 'hi there!',
+                description: 'hi there!',
                 rating: -22,
                 tags: ['c', 'crips', 'a lot of food', 'middle'],
-                filter: 'CTF'
+                type: 'CTF'
             },
                 {
                     title: 'test2',
-                    body: 'F:LSAJOPFJASOFJASPIHJFPOQWKFPOASJPOOPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP!',
+                    description: 'F:LSAJOPFJASOFJASPIHJFPOQWKFPOASJPOOPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP!',
                     rating: 100,
                     tags: ['flask', 'spring', 'summer', 'avangard'],
-                    filter: 'hackathon'
+                    type: 'Продуктовое программирование'
                 },
                 {
                     title: 'test3',
-                    body: 'hi there!',
+                    description: 'hi there!',
                     rating: -9999,
                     tags: ['fanta', 'cola', 'senior', 'sprite', 'google'],
-                    filter: 'algorithmic'
+                    type: 'Спортивное программирование'
                 },
                 {
                     title: 'test4',
-                    body: 'hi!!! there!',
+                    description: 'hi!!! there!',
                     rating: 101,
                     tags: ['c', 'spring', 'vue.js',
                         'IE'],
-                    filter: 'algorithmic'
-                },
+                    type: 'Спортивное программирование'
+                },*/
             ],
             selectedSort: 'Все',
             searchTag: '',
             searchTags: [],
             searchedTags: [],
-            sortOptions: ['Все', 'CTF', 'hackathon',
-                'algorithmic']
+            baseTags: [],
+            sortOptions: ['Все', 'CTF',
+                'Продуктовое программирование',
+                'Спортивное программирование']
         }
     },
     computed: {
@@ -90,26 +94,28 @@ export default {
                 return [...this.update()];
             }
             return [...this.update()].filter(post =>
-                post.filter === this.selectedSort
+                post.type.displayName === this.selectedSort
             )
         },
         sortedAndSearchedEvents() {
             return this.sortedEvents.filter(post =>
-                post.tags.join('').includes(
+                post.tags.map(obj => obj.name.toLowerCase()).join('').includes(
                     this.searchTag
                         .toLowerCase()))
         }
     },
     methods: {
         onEnter() {
-            this.searchTags.push(this.searchTag)
+            this.searchTags.push({name: this.searchTag})
             this.searchTag = ''
 
             this.searchedTags = this.update()
             console.log(this.searchedTags)
         },
         onRemove(tag) {
-            let index = this.searchTags.indexOf(tag)
+            let index = this.searchTags.map(obj =>
+                obj.name)
+                .indexOf(tag)
 
             console.log(index)
 
@@ -120,20 +126,37 @@ export default {
 
         },
         update() {
+            console.log(this.posts)
+            console.log(this.searchTags);
+            console.log(this.searchTag);
+            console.log(
+                [...this.posts].filter(subArr =>
+                this.searchTags.every(el =>
+                    subArr.tags.map(obj => obj.name.toLowerCase()).includes(el.name.toLowerCase()))));
             return [...this.posts].filter(subArr =>
                 this.searchTags.every(el =>
-                    subArr.tags.includes(el)))
+                    subArr.tags.map(obj => obj.name.toLowerCase()).includes(el.name.toLowerCase())))
+        },
+        async fetchTags() {
+            let obj = await axios
+                .get(`${BASE_URL}events/tags`)
+            obj.data.forEach(tag => this.baseTags.push(tag))
+            console.log(this.baseTags);
         },
         async fetchPosts() {
             let obj = await axios
-                .get('http://95.140.158.92:8080/api/events/tags')
-            console.log(obj)
+                .get(`${BASE_URL}events/`)
+            obj.data.forEach(post => {
+                this.posts.push(post)
+            })
+            console.log(this.posts);
         },
         onChange(elem){
             this.selectedSort = elem.target.value
         }
     },
     mounted() {
+        this.fetchTags();
         this.fetchPosts();
     }
 }

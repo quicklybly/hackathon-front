@@ -10,7 +10,7 @@
             column">
                 <h1>{{ post.title }}</h1>
                 <h4 style="word-break: break-all">{{
-                    post.body
+                    post.description
                     }}</h4>
             </div>
         </div>
@@ -19,14 +19,14 @@
             <div style="display: flex">
                 <h1 class="contain"
                     @click="upVote">☻</h1>
-                <h1 class="contain">{{ post.rating }}</h1>
+                <h1 class="contain"> 123 </h1>
                 <h1 class="contain"
                     @click="downVote">☺</h1>
             </div>
             <div style="display: flex; align-self: center;">
                 <div style="border: 1px solid black; padding:
              2px 5px; margin: 0 10px;">
-                    {{ post.filter }}
+                    {{ post.type.displayName }}
                 </div>
                 <dnlkk-array-slider :tags="post.tags"
                 :is-removable="false"/>

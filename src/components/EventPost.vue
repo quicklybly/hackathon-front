@@ -27,7 +27,7 @@
                     @click="downVote"
                     style="color: indianred; cursor: pointer">▼</h1>
             </div>
-            <div style="display: flex; align-self: center;">
+            <div style="display: flex; align-items: center;">
                 <div style="border: 1px solid black; padding:
              2px 5px; margin: 0 10px;">
                     {{ post.type.displayName }}

@@ -2,13 +2,13 @@ import {computed, ref} from "vue";
 
 export function useInfo() {
 
-    const name = ref('name')
-    const surname = ref('surname')
-    const patronymic = ref('ot4estvo')
-    const birthDate = ref('01.01.1970')
-    const login = ref('login')
-    const passport = ref('1817012345')
-    const email = ref('mail@mail.ru')
+    const name = ref(this.$store.state.self.name)
+    const surname = ref(this.$store.state.self.surname)
+    const patronymic = ref(this.$store.state.self.patronymic)
+    const birthDate = ref(this.$store.state.self.birthday)
+    const login = ref(this.$store.state.self.username)
+    const passport = ref(this.$store.state.self.document)
+    const email = ref(this.$store.state.self.email)
 
     let named = name.value.trim()
     named = named.charAt(0).toUpperCase() + named.substring(1)

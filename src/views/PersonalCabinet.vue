@@ -5,16 +5,21 @@
           <img src="../components/img/icon/user-icon.png" class="user-icon">
         </div>
         <div class="col-lg-5 col-md-7 col-sm-12 main-inform">
-          <p style="font-size: 25px; font-weight: 600; margin-left: -1px">{{ fullname }}</p>
-          <p style="font-size: 22px; font-weight: 600; color: #EC1D35">{{ email }}</p>
+          <p style="font-size: 25px; font-weight: 600;
+          margin-left: -1px">{{ fullname }}</p>
+          <p style="font-size: 22px; font-weight: 600;
+          color: #EC1D35">{{ email }}</p>
         </div>
         <div class="col-lg-2 col-md-6 col-sm-6 sec-inform" >
           <p style="font-size: 22px; font-weight: 600;">Паспорт</p>
           <p style="font-size: 22px; font-weight: 600;">Дата рождения</p>
         </div>
         <div class="col-lg-2 col-md-6 col-sm-6 third-inform">
-          <p style="font-size: 25px; font-weight: 500;">{{ passport }}</p>
-          <p style="font-size: 22px; font-weight: 500;">{{ birthDate }}</p>
+          <p
+                  style="font-size: 25px; font-weight: 500;">{{ passport }}</p>
+          <p
+                  style="font-size: 22px; font-weight:
+                  500;">{{ birthDate }}</p>
         </div>
       </div>
     </div>
@@ -30,25 +35,29 @@
 
 <script>
 import {useInfo} from "@/components/hooks/useInfo";
+import {mapState} from "vuex";
 
 export default {
     name: "PersonalCabinet",
-    setup(props) {
-        const {
-            fullname,
-            login,
-            birthDate,
-            passport,
-            email
-        } = useInfo();
+    computed: {
+        ...mapState({
+            fullname: state => {
+                let named = state.self.name.trim()
+                named = named.charAt(0).toUpperCase() + named.substring(1)
 
-        return {
-            fullname,
-            login,
-            birthDate,
-            passport,
-            email
-        }
+                let surnamed = state.self.surname.trim()
+                surnamed = surnamed.charAt(0).toUpperCase() + surnamed.substring(1)
+
+                let patronymiced = state.self.patronymic.trim()
+                patronymiced = patronymiced.charAt(0).toUpperCase() + patronymiced.substring(1)
+
+                return `${named} ${surnamed} ${patronymiced}`.trim()
+            },
+            login: state => state.self.username,
+            birthDate: state => state.self.birthday,
+            passport: state => state.self.document,
+            email: state => state.self.email
+        })
     }
 }
 </script>

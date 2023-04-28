@@ -1,6 +1,7 @@
 <template>
     <link rel="stylesheet"
           href="/src/components/fontello-a6d9d753/css/fontello.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <nav-bar/>
     <div id="app">
         <router-view/>

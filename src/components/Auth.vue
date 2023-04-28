@@ -33,11 +33,11 @@
                 </dnlkk-button>
             </div>
             <div class="row">
-                <i class="btn-hover-link"
-                   @click="onChangeRecovery"
-                   style="cursor: pointer">
-                    Забыли
-                    пароль?</i>
+<!--                <i class="btn-hover-link"-->
+<!--                   @click="onChangeRecovery"-->
+<!--                   style="cursor: pointer">-->
+<!--                    Забыли-->
+<!--                    пароль?</i>-->
                 <i class="btn-hover-link"
                    @click="onChangeRegistration" style="cursor:
         pointer">Зарегистрироваться</i>

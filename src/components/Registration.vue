@@ -12,51 +12,56 @@
                     <p>Зарегистрироваться в ФСП</p>
                     <p v-if="isError"
                        style="color: indianred">Ой! В одном из
-                        полей ошибка.</p>
-                </div>
-                <div class="row">
-                    <dnlkk-input
-                        v-model="login"
-                            placeholder="Логин" required/>
-                </div>
-                <div class="row">
-                    <dnlkk-input
-                        v-model="password"
-                            type="password"
-                            placeholder="Пароль" required/>
-                </div>
-                <div class="row">
-                    <dnlkk-input
-                        v-model="repeatPass"
-                            type="password"
-                            placeholder="Повторите пароль" required/>
-                </div>
-                <div class="row">
-                    <dnlkk-input
-                        v-model="email"
-                            placeholder="Почта" required/>
+                    полей ошибка.</p>
                 </div>
                 <div class="row">
                     <dnlkk-input
                         v-model="name"
-                            placeholder="Имя" required/>
+                        placeholder="Имя*" required/>
                 </div>
                 <div class="row">
                     <dnlkk-input
                         v-model="surname"
-                            placeholder="Фамилия" required/>
+                        placeholder="Фамилия*" required/>
                 </div>
                 <div class="row">
                     <dnlkk-input
                         v-model="patronymic"
-                            placeholder="Отчество"/>
+                        placeholder="Отчество"/>
                 </div>
                 <div class="row">
                     <dnlkk-input
                         v-model="birthday"
-                            type="date"
-                            placeholder="Дата рождения"
-                            required/>
+                        type="date"
+                        placeholder="Дата рождения*"
+                        required/>
+                </div>
+                <div class="row">
+                    <dnlkk-input
+                    v-model="login"
+                    placeholder="Логин*" required/>
+                </div>
+                <div class="row">
+                    <dnlkk-input
+                    v-model="password"
+                    type="password"
+                    placeholder="Пароль*" required/>
+                </div>
+                <div class="row">
+                    <dnlkk-input
+                    v-model="repeatPass"
+                    type="password"
+                    placeholder="Повторите пароль*" required/>
+                </div>
+                <div class="row">
+                    <dnlkk-input
+                    v-model="email"
+                    placeholder="Почта*" required/>
+                </div>
+                <div class="row">
+                    <dnlkk-input
+                        v-model="passport"
+                        placeholder="Паспорт*" required/>
                 </div>
                 <div class="row btn-row">
                     <button
@@ -79,6 +84,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import {BASE_URL} from "@/baseUrl";
+
 export default {
     name: "Registration",
     data(){
@@ -91,6 +99,7 @@ export default {
             surname: '',
             patronymic: '',
             birthday: '',
+            passport: '',
             isError: false
         }
     },
@@ -114,7 +123,27 @@ export default {
             }
         },
         async postRegistration() {
+            return await axios
+                .post(`${BASE_URL}auth/sportsman/register`,
+                    {username: this.login,
+                        password: this.password,
+                        email: this.email,
+                        name: this.name,
+                        surname: this.surname,
+                        patronymic: this.patronymic,
+                        birthday: this.birthday,
+                        document: this.passport
+                })
+                .then(response => {
 
+                    this.isError = false
+                    this.$emit('login')
+                    return response.data
+                })
+                .catch(error => {
+                    this.isError = true
+                    return null
+                });
         }
     }
 }

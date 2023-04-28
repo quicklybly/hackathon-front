@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  frontend_nginx:
+    container_name: frontend_nginx
+    image: quicklybly/hackaton-front
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"

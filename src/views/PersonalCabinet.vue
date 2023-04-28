@@ -54,6 +54,11 @@ export default {
 </script>
 
 <style scoped>
+
+p{
+  color: #3A3C46;
+}
+
 @media (max-width: 2560px) {
   .user-icon {
     width: 100px;

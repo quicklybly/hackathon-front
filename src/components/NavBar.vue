@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2 col-xs-12" style="margin: auto">
                     <button
-                        @click="$router.push('/calendar')"
+                        @click="$router.push('/events')"
                         type="button"
                             class="btn btn-itm-color btn-lg">
                         События

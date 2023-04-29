@@ -22,7 +22,7 @@
                     style="color: cornflowerblue; cursor: pointer">▲</h1>
                 <h1 class="contain"
                     :style='{color: color}'>
-                    123 </h1>
+                    {{ vote }} </h1>
                 <h1 class="contain"
                     @click="downVote"
                     style="color: indianred; cursor: pointer">▼</h1>
@@ -46,15 +46,27 @@ export default {
     data() {
         return {
             color: 'black',
+            vote: 0
         }
     },
     methods: {
         upVote() {
-            this.color = 'cornflowerblue'
+            if (this.vote !== 0) {
+                this.vote = 0
+                this.color = 'black'
+            } else {
+                this.vote = 1
+                this.color = 'cornflowerblue'
+            }
         },
         downVote() {
-            this.color = 'indianred'
-        }
+            if (this.vote !== 0) {
+                this.vote = 0
+                this.color = 'black'
+            } else {
+                this.vote = -1
+                this.color = 'indianred'
+            }}
     },
     props: ['post']
 }

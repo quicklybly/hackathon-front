@@ -6,7 +6,7 @@
         <transition-group name="tag-list">
             <div class="tag-item"
                  v-for="tag in chosenTags"
-            @click="remove(tag.name)">
+                 @click="remove(tag.name)">
                 {{ tag.name }}
             </div>
         </transition-group>
@@ -54,7 +54,11 @@ export default {
                 this.current++;
         },
         remove(tag) {
-            if (this.isRemovable) this.$emit('remove', tag)
+            if (this.isRemovable) {
+                this.$emit('remove', tag)
+                this.nextTag()
+                this.prevTag()
+            }
         }
     }
 
@@ -72,11 +76,11 @@ export default {
 
 .clickable {
 	cursor: pointer;
-    margin: 0;
+	margin: 0;
 }
 
-.contain{
-    display: flex;
+.contain {
+	display: flex;
 }
 
 .tag-list .tag-item {

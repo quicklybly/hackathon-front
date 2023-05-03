@@ -135,13 +135,13 @@ export default defineComponent({
                 v-model="email"
                 placeholder="Почта*" required/>
     </div>
-    <hr>
     <div class="row-cols-auto">
         <h5>Паспорт:</h5>
         <dnlkk-input
                 v-model="passport"
                 placeholder="Паспорт*" required/>
     </div>
+    <br>
     <dnlkk-button @click="reg">жмак</dnlkk-button>
 </template>
 

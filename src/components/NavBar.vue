@@ -65,6 +65,7 @@
 <script>
 
 import {mapState} from "vuex";
+import Cookies from "js-cookie";
 
 export default {
     name: "NavBar",
@@ -79,11 +80,15 @@ export default {
         }
     },
     mounted() {
+        console.log('hi there!')
+
+        console.log(Cookies.get('jwt'));
+
         this.$store.dispatch('login', {
             headers: {
                 'Authorization':
                     'Bearer ' +
-                    localStorage.getItem('jwt')
+                    Cookies.get('jwt')
             }
         })
             .then()

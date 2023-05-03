@@ -1,6 +1,7 @@
 import {createStore} from 'vuex'
 import axios from "axios";
 import {BASE_URL} from "@/baseUrl";
+import Cookies from 'js-cookie';
 
 export default createStore({
     state: {
@@ -35,8 +36,8 @@ export default createStore({
 
             axios.get(`${BASE_URL}auth/logout`)
                 .then(response => {
-                    context.state.self = response.data
-                    context.state.isAuth = true;
+                    state.self = response.data
+                    state.isAuth = true;
                     // context.commit('setLogin', login)
                 })
                 .catch(error => {

@@ -71,10 +71,9 @@ export default {
 
         },
         onAuth() {
-            this.fetchJWT(this.login, this.password)
-
-            console.log(Cookies.get('jwt'));
-
+            this.fetchJWT(this.login, this.password);
+        },
+        goOn() {
             this.$store.dispatch('login', {
                 headers: {
                     'Authorization':
@@ -82,13 +81,14 @@ export default {
                         Cookies.get('jwt')
                 }
             })
-                .then()
+                .then(() =>
+                    this.$router.push('/lk'))
                 .catch(error => {
                     console.error(error)
                 })
         },
-        async fetchJWT(login, pass) {
-            return await axios
+        fetchJWT(login, pass) {
+            return axios
                 .post(`${BASE_URL}auth/login`, {
                     username:
                     login, password: pass
@@ -99,7 +99,7 @@ export default {
                         path: ''
                     });
                     this.isError = false
-                    this.$router.push('/lk')
+                    this.goOn()
                     return response.data
                 })
                 .catch(error => {

@@ -13,14 +13,14 @@
                  object-fit: scale-down"/>
                 <div style="display: flex; justify-content: space-between">
                     <div style="display: flex">
-                        <h1 class="contain"
+                        <h1 class="contain no-select"
                             @click="upVote"
                             style="color: cornflowerblue; cursor: pointer">
                             ▲</h1>
                         <h1 class="contain"
                             :style='{color: color}'>
                             {{ sumVotes }} </h1>
-                        <h1 class="contain"
+                        <h1 class="contain no-select"
                             @click="downVote"
                             style="color: indianred; cursor: pointer">
                             ▼</h1>
@@ -154,4 +154,10 @@ export default {
 	display: flex;
 	margin: 0;
 }
+.no-select {
+     -webkit-user-select: none; /* Для Safari */
+     -moz-user-select: none; /* Для Firefox */
+     -ms-user-select: none; /* Для IE */
+     user-select: none; /* Общее значение */
+ }
 </style>

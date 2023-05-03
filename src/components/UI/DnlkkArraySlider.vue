@@ -2,7 +2,7 @@
     <div class="contain">
         <h3 @click="prevTag"
             v-if="current > 0"
-            class="clickable">◄</h3>
+            class="clickable no-select">◄</h3>
         <transition-group name="tag-list">
             <div class="tag-item"
                  v-for="tag in chosenTags"
@@ -11,7 +11,7 @@
             </div>
         </transition-group>
         <h3 @click="nextTag"
-            class="clickable"
+            class="clickable no-select"
             v-if="current+max < tags.length">►</h3>
     </div>
 </template>
@@ -99,5 +99,11 @@ export default {
 
 .tag-list-move {
 	transition: transform 0.4s ease;
+}
+.no-select {
+    -webkit-user-select: none; /* Для Safari */
+    -moz-user-select: none; /* Для Firefox */
+    -ms-user-select: none; /* Для IE */
+    user-select: none; /* Общее значение */
 }
 </style>

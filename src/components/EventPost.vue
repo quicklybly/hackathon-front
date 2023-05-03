@@ -52,47 +52,62 @@ export default {
     data() {
         return {
             color: 'black',
-            sumVotes: this.post.sumVotes,
+            startVal: this.post.sumVotes,
             vote: 0
+        }
+    },
+    computed: {
+        sumVotes: {
+            get() {
+                return this.post.sumVotes
+            },
+            set(newValue) {
+                return newValue
+            }
         }
     },
     methods: {
         upVote() {
-            if (this.vote !== 0) {
+            if (this.vote === -1) {
                 this.postVote(this.post.id, 0)
                 this.color = 'black'
                 this.vote = 0
             } else {
-                this.postVote(this.post.id,1)
+                this.postVote(this.post.id, 1)
                 this.color = 'cornflowerblue'
                 this.vote = 1
             }
+            return this.vote
         },
         downVote() {
-            if (this.vote !== 0) {
-                this.postVote(this.post.id,0)
+            if (this.vote === 1) {
+                this.postVote(this.post.id, 0)
                 this.color = 'black'
                 this.vote = 0
             } else {
-                this.postVote(this.post.id,-1)
+                this.postVote(this.post.id, -1)
                 this.color = 'indianred'
                 this.vote = -1
             }
+            return this.vote
         },
         async postVote(competitionId, vote) {
             return await axios
                 .post(`${BASE_URL}users/vote`, {
-                    competitionId: competitionId, vote: vote},
-                    {headers: {
-                        'Authorization':
-                            'Bearer ' +
-                            Cookies.get('jwt')
-                    }
-                })
+                        competitionId: competitionId, vote: vote
+                    },
+                    {
+                        headers: {
+                            'Authorization':
+                                'Bearer ' +
+                                Cookies.get('jwt')
+                        }
+                    })
                 .then(response => {
                     console.log(response)
                     this.sumVotes = response.data
-                    return response
+                    this.$emit('update')
+                    return response.data
                 })
                 .catch(error => {
                     console.log(error);

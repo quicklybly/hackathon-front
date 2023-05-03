@@ -1,7 +1,8 @@
 <template>
     <div
         v-for="post in posts">
-        <event-post :post="post"/>
+        <event-post :post="post"
+        @update="this.$emit('update')"/>
         <hr />
     </div>
 </template>

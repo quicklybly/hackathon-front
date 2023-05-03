@@ -32,21 +32,23 @@ export default {
 	left: 0;
 	z-index: 1;
 	background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
 	position: fixed;
 	display: flex;
 }
 
 .dialog__content {
 	margin: auto;
-    border-radius: 12px;
-    min-height: 50px;
+	border-radius: 12px;
+	min-height: 50px;
 	min-width: 300px;
-    background: white; display: flex;
-    justify-content: center;
-    align-self: center;
-align-items: center;
-    align-content: center;
-    flex-direction: column;
+	background: white;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	align-items: center;
+	align-content: center;
+	flex-direction: column;
+    padding: 10px;
 }
 </style>

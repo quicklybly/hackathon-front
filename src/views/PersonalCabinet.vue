@@ -19,8 +19,7 @@
             </div>
         </div>
         <dnlkk-dialog v-model:show="dialogVisible">
-            <div> Изменяйте данные и своим любимым!</div>
-            <dnlkk-button>жмак</dnlkk-button>
+            <user-editor @close="dialogVisible = false"/>
         </dnlkk-dialog>
         <dnlkk-button
                 @click="showDialog"
@@ -35,11 +34,11 @@
 
 <script>
 import {mapState} from "vuex";
-import DnlkkButton from "@/components/UI/DnlkkButton.vue";
+import UserEditor from "@/components/UserEditor.vue";
 
 export default {
     name: "PersonalCabinet",
-    components: {DnlkkButton},
+    components: {UserEditor},
     data() {
         return {
             dialogVisible: false

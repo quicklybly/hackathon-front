@@ -1,7 +1,10 @@
 <template>
     <hr/>
-    <div class="main">
-        <div class="instruments">
+    <div class="main"
+         style="justify-content: space-between">
+        <div class="instruments"
+             style="display: flex;
+  flex-grow: 1; ">
             <div class="input">
                 <dnlkk-input list="tags"
                              v-focus

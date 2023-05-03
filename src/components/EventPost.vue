@@ -2,47 +2,59 @@
     <div style="margin: 10px 50px; padding: 10px 5px;
         border: 1px solid #9B9C9E; border-radius: 15px;">
         <div style="display: flex;">
-            <img src="../assets/logo.png"
-                 style="aspect-ratio: 1/1;
+            <div style="display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        margin: 0 20px 0 10px">
+                <img src="../assets/logo.png"
+                     style="aspect-ratio: 1/1;
                  width: auto;
-                 object-fit: scale-down;"/>
+                 object-fit: scale-down"/>
+                <div style="display: flex; justify-content: space-between">
+                    <div style="display: flex">
+                        <h1 class="contain"
+                            @click="upVote"
+                            style="color: cornflowerblue; cursor: pointer">
+                            ▲</h1>
+                        <h1 class="contain"
+                            :style='{color: color}'>
+                            {{ sumVotes }} </h1>
+                        <h1 class="contain"
+                            @click="downVote"
+                            style="color: indianred; cursor: pointer">
+                            ▼</h1>
+                    </div>
+                </div>
+            </div>
             <div style="display: flex; flex-direction:
             column">
                 <h1>
                     <a :href="post.link"
                        target="_blank"
-                    style="font-weight: 900;
+                       style="font-weight: 900;
                     text-decoration: none; color: black">
                         {{ post.title }}
                     </a>
                 </h1>
+                <h5
+                    style="font-style: italic">Дата
+                    соревнований:
+                    {{ dateFormat(post.dateStart) }}
+                           &mdash;
+                    {{ dateFormat(post.dateEnd) }}</h5>
                 <h4 style="word-break: break-all">{{
                     post.description
                     }}</h4>
-            </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between">
-            <div style="display: flex">
-                <h1 class="contain"
-                    @click="upVote"
-                    style="color: cornflowerblue; cursor: pointer">
-                    ▲</h1>
-                <h1 class="contain"
-                    :style='{color: color}'>
-                    {{ sumVotes }} </h1>
-                <h1 class="contain"
-                    @click="downVote"
-                    style="color: indianred; cursor: pointer">
-                    ▼</h1>
-            </div>
-            <div style="display: flex; align-items: center;">
-                <div style="border: 1px solid black; padding:
+                <div style="display: flex; align-items: center;
+                            justify-content: space-between">
+                    <div style="border: 1px solid black; padding:
              2px 5px; margin: 0 10px;">
-                    {{ post.type.displayName }}
+                        {{ post.type.displayName }}
+                    </div>
+                    <dnlkk-array-slider :tags="post.tags"
+                                        :is-removable="false"/>
                 </div>
-                <dnlkk-array-slider :tags="post.tags"
-                                    :is-removable="false"/>
             </div>
         </div>
     </div>
@@ -60,7 +72,12 @@ export default {
         return {
             color: 'black',
             startVal: this.post.sumVotes,
-            vote: 0
+            vote: 0,
+            monthNames: [
+                "Январь", "Февраль", "Март", "Апрель",
+                "Май", "Июнь", "Июль", "Август",
+                "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+            ]
         }
     },
     computed: {
@@ -74,6 +91,12 @@ export default {
         }
     },
     methods: {
+        dateFormat(date) {
+            let arr = date.split('-');
+            return arr[2] + ' ' + this.monthNames[+arr[1]
+                - 1]
+                + `'${arr[0].slice(2)}`
+        },
         upVote() {
             if (this.vote === -1) {
                 this.postVote(this.post.id, 0)

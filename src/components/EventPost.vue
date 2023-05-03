@@ -8,7 +8,14 @@
                  object-fit: scale-down;"/>
             <div style="display: flex; flex-direction:
             column">
-                <h1>{{ post.title }}</h1>
+                <h1>
+                    <a :href="post.link"
+                       target="_blank"
+                    style="font-weight: 900;
+                    text-decoration: none; color: black">
+                        {{ post.title }}
+                    </a>
+                </h1>
                 <h4 style="word-break: break-all">{{
                     post.description
                     }}</h4>

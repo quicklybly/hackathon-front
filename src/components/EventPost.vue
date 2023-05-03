@@ -19,13 +19,15 @@
             <div style="display: flex">
                 <h1 class="contain"
                     @click="upVote"
-                    style="color: cornflowerblue; cursor: pointer">▲</h1>
+                    style="color: cornflowerblue; cursor: pointer">
+                    ▲</h1>
                 <h1 class="contain"
                     :style='{color: color}'>
-                    {{ vote }} </h1>
+                    {{ sumVotes }} </h1>
                 <h1 class="contain"
                     @click="downVote"
-                    style="color: indianred; cursor: pointer">▼</h1>
+                    style="color: indianred; cursor: pointer">
+                    ▼</h1>
             </div>
             <div style="display: flex; align-items: center;">
                 <div style="border: 1px solid black; padding:
@@ -41,32 +43,62 @@
 
 <script>
 
+import axios from "axios";
+import {BASE_URL} from "@/baseUrl";
+import Cookies from "js-cookie";
+
 export default {
     name: "EventPost",
     data() {
         return {
             color: 'black',
+            sumVotes: this.post.sumVotes,
             vote: 0
         }
     },
     methods: {
         upVote() {
             if (this.vote !== 0) {
-                this.vote = 0
+                this.postVote(this.post.id, 0)
                 this.color = 'black'
+                this.vote = 0
             } else {
-                this.vote = 1
+                this.postVote(this.post.id,1)
                 this.color = 'cornflowerblue'
+                this.vote = 1
             }
         },
         downVote() {
             if (this.vote !== 0) {
-                this.vote = 0
+                this.postVote(this.post.id,0)
                 this.color = 'black'
+                this.vote = 0
             } else {
-                this.vote = -1
+                this.postVote(this.post.id,-1)
                 this.color = 'indianred'
-            }}
+                this.vote = -1
+            }
+        },
+        async postVote(competitionId, vote) {
+            return await axios
+                .post(`${BASE_URL}users/vote`, {
+                    competitionId: competitionId, vote: vote},
+                    {headers: {
+                        'Authorization':
+                            'Bearer ' +
+                            Cookies.get('jwt')
+                    }
+                })
+                .then(response => {
+                    console.log(response)
+                    this.sumVotes = response.data
+                    return response
+                })
+                .catch(error => {
+                    console.log(error);
+                    return null
+                });
+        }
     },
     props: ['post']
 }

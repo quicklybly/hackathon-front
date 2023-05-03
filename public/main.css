@@ -1,0 +1,7 @@
+.no-select {
+	cursor: pointer;
+	-webkit-user-select: none; /* Для Safari */
+	-moz-user-select: none; /* Для Firefox */
+	-ms-user-select: none; /* Для IE */
+	user-select: none; /* Общее значение */
+}

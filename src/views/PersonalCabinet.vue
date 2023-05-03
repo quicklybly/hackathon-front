@@ -19,7 +19,7 @@
                   style="font-size: 25px; font-weight: 500;">{{ passport }}</p>
           <p
                   style="font-size: 22px; font-weight:
-                  500;">{{ birthDate }}</p>
+                  500;">{{ formatDate(birthDate) }}</p>
         </div>
       </div>
     </div>

@@ -52,9 +52,9 @@
                 <h5
                         style="font-style: italic">Дата
                     соревнований:
-                    {{ dateFormat(post.dateStart) }}
+                    {{ formatDate(post.dateStart) }}
                     &mdash;
-                    {{ dateFormat(post.dateEnd) }}</h5>
+                    {{ formatDate(post.dateEnd) }}</h5>
                 <h4 style="word-break: break-all">{{
                     post.description
                     }}</h4>
@@ -85,11 +85,6 @@ export default {
             color: 'black',
             startVal: this.post.sumVotes,
             vote: 0,
-            monthNames: [
-                "Январь", "Февраль", "Март", "Апрель",
-                "Май", "Июнь", "Июль", "Август",
-                "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-            ],
             isFavourite: false
         }
     },
@@ -106,12 +101,6 @@ export default {
     methods: {
         favourite() {
             this.isFavourite = !this.isFavourite
-        },
-        dateFormat(date) {
-            let arr = date.split('-');
-            return arr[2] + ' ' + this.monthNames[+arr[1]
-                - 1]
-                + `'${arr[0].slice(2)}`
         },
         upVote() {
             if (this.vote === -1) {
@@ -169,12 +158,5 @@ export default {
 .contain {
 	display: flex;
 	margin: 0;
-}
-
-.no-select {
-	-webkit-user-select: none; /* Для Safari */
-	-moz-user-select: none; /* Для Firefox */
-	-ms-user-select: none; /* Для IE */
-	user-select: none; /* Общее значение */
 }
 </style>

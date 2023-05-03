@@ -5,6 +5,7 @@ import store from './store'
 
 import components from "@/components/UI";
 import directives from "@/directives";
+import dateMixin from "@/mixins/dateMixin";
 
 const app = createApp(App)
 
@@ -19,4 +20,5 @@ directives.forEach(directive => {
 app
     .use(store)
     .use(router)
+    .mixin(dateMixin)
     .mount('#app')

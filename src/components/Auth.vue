@@ -10,7 +10,8 @@
                 <div
                         class="auth">
                     <p class="title">Вход в аккаунт</p>
-                    <p class="title" style="color: indianred"
+                    <p class="title"
+                       style="color: indianred"
                        v-if="isError">Ошибка в логине
                         или пароле</p>
                 </div>
@@ -33,11 +34,11 @@
                 </dnlkk-button>
             </div>
             <div class="row">
-<!--                <i class="btn-hover-link"-->
-<!--                   @click="onChangeRecovery"-->
-<!--                   style="cursor: pointer">-->
-<!--                    Забыли-->
-<!--                    пароль?</i>-->
+                <!--                <i class="btn-hover-link"-->
+                <!--                   @click="onChangeRecovery"-->
+                <!--                   style="cursor: pointer">-->
+                <!--                    Забыли-->
+                <!--                    пароль?</i>-->
                 <i class="btn-hover-link"
                    @click="onChangeRegistration" style="cursor:
         pointer">Зарегистрироваться</i>
@@ -50,6 +51,7 @@
 <script>
 import axios from "axios";
 import {BASE_URL} from "@/baseUrl";
+import Cookies from 'js-cookie';
 
 export default {
     name: "Auth",
@@ -71,13 +73,13 @@ export default {
         onAuth() {
             this.fetchJWT(this.login, this.password)
 
-            console.log(localStorage.getItem('jwt'));
+            console.log(Cookies.get('jwt'));
 
             this.$store.dispatch('login', {
                 headers: {
                     'Authorization':
-                    'Bearer ' +
-                        localStorage.getItem('jwt')
+                        'Bearer ' +
+                        Cookies.get('jwt')
                 }
             })
                 .then()
@@ -92,13 +94,16 @@ export default {
                     login, password: pass
                 })
                 .then(response => {
-                    localStorage.setItem('jwt',
-                        `${response.data.jwt}`)
+                    Cookies.set('jwt', `${response.data.jwt}`, {
+                        expires: 7,
+                        path: ''
+                    });
                     this.isError = false
                     this.$router.push('/lk')
                     return response.data
                 })
                 .catch(error => {
+                    console.log(error);
                     this.isError = true
                     return null
                 });

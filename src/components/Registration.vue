@@ -141,6 +141,7 @@ export default {
                     return response.data
                 })
                 .catch(error => {
+                    console.log(error);
                     this.isError = true
                     return null
                 });

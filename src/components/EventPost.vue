@@ -7,6 +7,17 @@
                         align-items: center;
                         flex-direction: column;
                         margin: 0 20px 0 10px">
+
+                <h1
+                    v-if="!isFavourite"
+                    class="no-select"
+                    @click="favourite"
+                    style="color: #402fff">☆</h1>
+                <h1 v-else
+                    class="no-select"
+                    @click="favourite"
+                    style="color: #ec1d35">★</h1>
+
                 <img src="../assets/logo.png"
                      style="aspect-ratio: 1/1;
                  width: auto;
@@ -15,14 +26,15 @@
                     <div style="display: flex">
                         <h1 class="contain no-select"
                             @click="upVote"
-                            style="color: cornflowerblue; cursor: pointer">
+                            style="color: #402fff; cursor:
+                            pointer">
                             ▲</h1>
                         <h1 class="contain"
                             :style='{color: color}'>
                             {{ sumVotes }} </h1>
                         <h1 class="contain no-select"
                             @click="downVote"
-                            style="color: indianred; cursor: pointer">
+                            style="color: #ec1d35; cursor: pointer">
                             ▼</h1>
                     </div>
                 </div>
@@ -38,10 +50,10 @@
                     </a>
                 </h1>
                 <h5
-                    style="font-style: italic">Дата
+                        style="font-style: italic">Дата
                     соревнований:
                     {{ dateFormat(post.dateStart) }}
-                           &mdash;
+                    &mdash;
                     {{ dateFormat(post.dateEnd) }}</h5>
                 <h4 style="word-break: break-all">{{
                     post.description
@@ -77,7 +89,8 @@ export default {
                 "Январь", "Февраль", "Март", "Апрель",
                 "Май", "Июнь", "Июль", "Август",
                 "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-            ]
+            ],
+            isFavourite: false
         }
     },
     computed: {
@@ -91,6 +104,9 @@ export default {
         }
     },
     methods: {
+        favourite() {
+            this.isFavourite = !this.isFavourite
+        },
         dateFormat(date) {
             let arr = date.split('-');
             return arr[2] + ' ' + this.monthNames[+arr[1]
@@ -104,7 +120,7 @@ export default {
                 this.vote = 0
             } else {
                 this.postVote(this.post.id, 1)
-                this.color = 'cornflowerblue'
+                this.color = '#402fff'
                 this.vote = 1
             }
             return this.vote
@@ -116,7 +132,7 @@ export default {
                 this.vote = 0
             } else {
                 this.postVote(this.post.id, -1)
-                this.color = 'indianred'
+                this.color = '#ec1d35'
                 this.vote = -1
             }
             return this.vote
@@ -154,10 +170,11 @@ export default {
 	display: flex;
 	margin: 0;
 }
+
 .no-select {
-     -webkit-user-select: none; /* Для Safari */
-     -moz-user-select: none; /* Для Firefox */
-     -ms-user-select: none; /* Для IE */
-     user-select: none; /* Общее значение */
- }
+	-webkit-user-select: none; /* Для Safari */
+	-moz-user-select: none; /* Для Firefox */
+	-ms-user-select: none; /* Для IE */
+	user-select: none; /* Общее значение */
+}
 </style>

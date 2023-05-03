@@ -58,7 +58,13 @@ export default {
                 let surnamed = state.self.surname.trim()
                 surnamed = surnamed.charAt(0).toUpperCase() + surnamed.substring(1)
 
-                let patronymiced = state.self.patronymic.trim()
+                let patronymiced
+                if (state.self.patronymic === null) {
+                    patronymiced = ''
+                }
+                else {
+                    patronymiced = state.self.patronymic.trim()
+                }
                 patronymiced = patronymiced.charAt(0).toUpperCase() + patronymiced.substring(1)
 
                 return `${named} ${surnamed} ${patronymiced}`.trim()

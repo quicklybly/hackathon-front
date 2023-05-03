@@ -1,44 +1,55 @@
 <template>
-    <div class="container-fluid">
-      <div class="row" style="margin-top: 30px">
-        <div class="col-lg-3 col-md-5 col-sm-12 text-center">
-          <img src="../components/img/icon/user-icon.png" class="user-icon">
+    <div class="container" id="main__cont">
+        <div id="info__cont">
+            <img
+                    src="../components/img/icon/user_logo.png"
+                    class="user-icon">
+            <div>
+                <dnlkk-space-text :display-text="'Логин'"
+                                  :data="login"/>
+                <dnlkk-space-text :display-text="'Фио'"
+                                  :data="fullname"/>
+                <dnlkk-space-text :display-text="'Почта'"
+                                  :data="email"/>
+                <dnlkk-space-text
+                        :display-text="'Дата рождения'"
+                        :data="formatDate(birthDate)"/>
+                <dnlkk-space-text :display-text="'Паспорт'"
+                                  :data="passport"/>
+            </div>
         </div>
-        <div class="col-lg-5 col-md-7 col-sm-12 main-inform">
-          <p style="font-size: 25px; font-weight: 600;
-          margin-left: -1px">{{ fullname }}</p>
-          <p style="font-size: 22px; font-weight: 600;
-          color: #EC1D35">{{ email }}</p>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6 sec-inform" >
-          <p style="font-size: 22px; font-weight: 600;">Паспорт</p>
-          <p style="font-size: 22px; font-weight: 600;">Дата рождения</p>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6 third-inform">
-          <p
-                  style="font-size: 25px; font-weight: 500;">{{ passport }}</p>
-          <p
-                  style="font-size: 22px; font-weight:
-                  500;">{{ formatDate(birthDate) }}</p>
-        </div>
-      </div>
+        <dnlkk-dialog v-model:show="dialogVisible">
+            <div> Изменяйте данные и своим любимым!</div>
+            <dnlkk-button>жмак</dnlkk-button>
+        </dnlkk-dialog>
+        <dnlkk-button
+                @click="showDialog"
+                style="margin: 1% 0 0 0"
+                type="button"
+                class="btn btn-itm-color btn-lg">
+            Редактировать данные
+        </dnlkk-button>
+        <hr style="color:red"/>
     </div>
-  <hr style="color: #EC1D35; border-width: 2px;">
-  <div class="container-fluid text-center">
-    <div class="row">
-      <div class="col-12">
-        <p>тут бы сделать штуки в стиле календаря, только вместо тегов - место в соревновании данного участника</p>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-import {useInfo} from "@/components/hooks/useInfo";
 import {mapState} from "vuex";
+import DnlkkButton from "@/components/UI/DnlkkButton.vue";
 
 export default {
     name: "PersonalCabinet",
+    components: {DnlkkButton},
+    data() {
+        return {
+            dialogVisible: false
+        }
+    },
+    methods: {
+        showDialog() {
+            this.dialogVisible = true
+        }
+    },
     computed: {
         ...mapState({
             fullname: state => {
@@ -63,59 +74,43 @@ export default {
 </script>
 
 <style scoped>
+#main__cont {
+	margin: 1% auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
 
-p{
-  color: #3A3C46;
+#info__cont {
+	word-break: break-word;
 }
 
 @media (max-width: 2560px) {
-  .user-icon {
-    width: 100px;
-    height: 100px;
-    margin: auto
-  }
-  .main-inform {
-    margin-left: -6%;
-  }
-  .sec-inform {
-    margin-left: -7%;
-  }
+	.user-icon {
+		width: 256px;
+		height: 256px;
+	}
+
+	#info__cont {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
 }
-@media (max-width: 768px) {
-  .user-icon {
-    width: 100px;
-    height: 100px;
-    margin: auto
-  }
-  .main-inform {
-    margin-left: -52px;
-  }
-  .sec-inform {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    margin: auto;
-  }
+
+@media (max-width: 600px) {
+	.user-icon {
+		width: 128px;
+		height: 128px;
+	}
+
+	#info__cont {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
-@media (max-width: 576px) {
-  .user-icon {
-    width: 100px;
-    height: 100px;
-    margin: auto
-  }
-  .main-inform {
-    margin: auto;
-  }
-  .sec-inform {
-   display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .third-inform{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-}
+
 </style>

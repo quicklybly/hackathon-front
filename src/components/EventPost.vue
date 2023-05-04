@@ -98,6 +98,28 @@ export default {
             }
         }
     },
+    watch: {
+        vote(newValue){
+            this.vote = newValue
+            switch (this.vote){
+                case -1:
+                    this.color = '#ec1d35'
+                    break
+                case 0:
+                    this.color = 'black'
+                    break
+                case 1:
+                    this.color = '#402fff'
+                    break
+                default:
+                    break
+            }
+            console.log(`hi ther! ${this.vote} ${this.color}`)
+        },
+    },
+    mounted() {
+        this.alreadyVoted()
+    },
     methods: {
         favourite() {
             this.isFavourite = !this.isFavourite
@@ -143,6 +165,26 @@ export default {
                     this.sumVotes = response.data
                     this.$emit('update')
                     return response.data
+                })
+                .catch(error => {
+                    console.log(error);
+                    return null
+                });
+        },
+        async alreadyVoted() {
+            return await axios
+                .get(`${BASE_URL}events/${this.post.id}/vote`,
+                    {
+                        headers: {
+                            'Authorization':
+                                'Bearer ' +
+                                Cookies.get('jwt')
+                        }
+                    })
+                .then(response => {
+                    console.log(response)
+                    this.vote = response.data.vote
+                    this.$emit('update')
                 })
                 .catch(error => {
                     console.log(error);

@@ -1,7 +1,7 @@
 <template>
     <transition-group name="post-list">
         <div
-            v-for="post in posts">
+            v-for="post in posts" :key="post.id">
             <event-post :post="post"
             @update="this.$emit('update')"/>
             <hr />
